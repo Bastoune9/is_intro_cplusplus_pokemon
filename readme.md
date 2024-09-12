@@ -1,3 +1,3 @@
-# Welcome in the best game ever !
+# Projet d'initiation à C++ !
 
-At leat we try !
+L'objectif de ce projet est de créer un jeu Pokemon minimaliste en C++.
