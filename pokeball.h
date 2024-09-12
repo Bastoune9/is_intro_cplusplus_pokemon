@@ -18,3 +18,4 @@ public:
 };
 
 #endif //INTROCPPPOKE_POKEBALL_H
+

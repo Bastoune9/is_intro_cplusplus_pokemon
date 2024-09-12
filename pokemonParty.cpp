@@ -77,3 +77,4 @@ Pokemon* PokemonParty::getPokemonByName(const std::string& name) {
     }
     throw std::invalid_argument("Aucun Pokémon trouvé avec ce nom dans la PokemonParty.");
 }
+

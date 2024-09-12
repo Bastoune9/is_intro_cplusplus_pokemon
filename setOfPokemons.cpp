@@ -7,3 +7,4 @@ void SetOfPokemon::displayPokemonList() {
         pokemon->displayInfo();
     }
 }
+

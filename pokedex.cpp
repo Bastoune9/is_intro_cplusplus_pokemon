@@ -81,4 +81,3 @@ void Pokedex::lireCSV (const std::string& nomFichier) {
     }
     fichier.close();
 }
-

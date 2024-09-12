@@ -26,3 +26,4 @@ public:
 inline SetOfPokemon::~SetOfPokemon() {}
 
 #endif //INTROCPPPOKE_SETOFPOKEMONS_H
+
