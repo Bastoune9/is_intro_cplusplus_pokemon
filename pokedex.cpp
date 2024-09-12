@@ -26,7 +26,7 @@ Pokedex* Pokedex::getInstance(const std::string& filename) {
 }
 
 // Redéfinition de getPokemonByIndex
-Pokemon* Pokedex::getPokemonByIndex(int id) const {
+Pokemon* Pokedex::getPokemonByIndex(int id) {
     for (const auto& pokemon : arrayOfPokemon) {
         if (pokemon->getId() == id) {
             return pokemon;  // Retourner une copie du Pokémon
@@ -36,7 +36,7 @@ Pokemon* Pokedex::getPokemonByIndex(int id) const {
 }
 
 // Redéfinition de getPokemonByName
-Pokemon* Pokedex::getPokemonByName(const std::string& name) const {
+Pokemon* Pokedex::getPokemonByName(const std::string& name) {
     for (const auto& pokemon : arrayOfPokemon) {
         if (pokemon->getName() == name) {
             return pokemon;  // Retourner une copie du Pokémon
@@ -44,6 +44,13 @@ Pokemon* Pokedex::getPokemonByName(const std::string& name) const {
     }
     throw std::invalid_argument("Aucun Pokémon avec ce nom trouvé");
 }
+
+// Renvoie un pokemon aléatoire
+Pokemon* Pokedex::getRandomPokemon() {
+    int randomIndex = std::rand() % arrayOfPokemon.size(); // NOLINT(*-narrowing-conversions, *-msc50-cpp)
+    return arrayOfPokemon[randomIndex];
+}
+
 
 // Fonction de chargement du fichier CSV
 void Pokedex::lireCSV (const std::string& nomFichier) {

@@ -24,18 +24,19 @@ public:
     Pokemon(const Pokemon& anotherPokemon);
     // Méthode affichage
     void displayInfo() const;
+    void displayAllInfo() const;
     // Fonctions de getter
     [[nodiscard]] double getAttackValue() const;
     [[nodiscard]] double getDefenseValue() const;
     [[nodiscard]] string getName() const;
+    static int getNumberOfPokemon();
+    static void displayNumberOfPokemons();
     [[nodiscard]] int getId() const;
     // Fonction d'attaque d'un autre Pokemon
     void attack(Pokemon& anotherPokemon) const;
-    static int getNumberOfPokemons();
 
     // Destructeur
     ~Pokemon();
-
 
 };
 

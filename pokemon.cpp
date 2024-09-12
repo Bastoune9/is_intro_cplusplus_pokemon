@@ -7,24 +7,26 @@ int Pokemon::numberOfPokemons = 0;
 // Constructeur
 Pokemon::Pokemon(int id, string name, double hitPoint, double attackValue, double defenseValue, int generation)
     : id(id), name(std::move(name)), hitPoint(hitPoint), attackValue(attackValue), defenseValue(defenseValue), generation(generation) {
-    std::cout << "Constructeur" << std::endl;
     numberOfPokemons++;
 }
 
 // Constructeur de recopie
 Pokemon::Pokemon(const Pokemon &anotherPokemon) : id(anotherPokemon.id), name(anotherPokemon.name), hitPoint(anotherPokemon.hitPoint), attackValue(anotherPokemon.attackValue), defenseValue(anotherPokemon.defenseValue), generation(anotherPokemon.generation) {
-    std::cout << "Recopie" << std::endl;
     numberOfPokemons++;
 }
 
 // Destructeur
 Pokemon::~Pokemon() {
-    std::cout << "Destructeur" << std::endl;
     numberOfPokemons--;
 }
 
 // Affichage
 void Pokemon::displayInfo() const {
+    std::cout << "ID : " << id << " / " << name << std::endl;
+}
+
+// Variante qui affiche plus de stats du Pokemon
+void Pokemon::displayAllInfo() const {
     std::cout << "ID : " << id << std::endl;
     std::cout << "Nom : " << name << std::endl;
     std::cout << "Points de vie : " << hitPoint << std::endl;
@@ -50,8 +52,12 @@ int Pokemon::getId() const {
     return id;
 }
 
-int Pokemon::getNumberOfPokemons() {
+int Pokemon::getNumberOfPokemon() {
     return numberOfPokemons;
+}
+
+void Pokemon::displayNumberOfPokemons() {
+    std::cout << "Nombre de Pokemons en mémoire : " << numberOfPokemons << std::endl;
 }
 
 // Fonction d'attaque d'un autre pokemonProgram

@@ -1,35 +1,39 @@
 #include <iostream>
 #include "pokedex.h"
+#include "pokeball.h"
+#include "pokemonParty.h"
 #include <vector>
 
 int main() {
-//    Pokemon electhor(1, "Electhor", 100, 30, 20, 1);  // Constructeur classique
-//    Pokemon sulfura(electhor);  // Constructeur de recopie
-//    Pokemon machopeur(2, "Machopeur", 40, 30, 10, 1);
-//    Pokemon flagadoss(3, "Flagadoss", 110, 15, 50, 1);
-//    electhor.displayInfo();
-//    machopeur.attack(electhor);
-//    electhor.attack(machopeur);
-//    electhor.attack(machopeur);
-
+    std::srand(static_cast<unsigned>(time(nullptr))); // NOLINT(*-msc51-cpp)
     Pokedex* pokedex = Pokedex::getInstance("../Ressources/pokedex.csv");
-    // Afficher la liste des Pokemons
-    Pokedex::displayPokemonList();
-
-    // Test de la récupération par index
+    Pokemon::displayNumberOfPokemons();
+    // Créer une pokeball
+    Pokeball pokeball;
     try {
-        Pokemon* azumarill = pokedex->getPokemonByIndex(184);
-        azumarill->displayInfo();
+        pokeball.addPokemon(pokedex->getPokemonByName("Azumarill"));
+        pokeball.addPokemon(pokedex->getPokemonByName("Heliolisk"));
+        pokeball.addPokemon(pokedex->getPokemonByIndex(333));
+        pokeball.addPokemon(pokedex->getPokemonByIndex(150));
+        pokeball.addRandomPokemon();
+        pokeball.addRandomPokemon();
+        pokeball.addRandomPokemon();
+        pokeball.addRandomPokemon();
+        pokeball.addRandomPokemon();
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
     }
-    // Test de la récupération par nom
+    // Créer une PokemonParty en utilisant une Pokeball
     try {
-        Pokemon* iguolta = pokedex->getPokemonByName("Heliolisk");
-        iguolta->displayInfo();
+        PokemonParty party(pokeball);  // Demande de choisir les Pokémon
     } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
+        std::cerr << "Erreur : " << e.what() << std::endl;
     }
 
+    // Afficher le contenu restant de la Pokeball
+    std::cout << "Contenu restant de la Pokeball :" << std::endl;
+    pokeball.displayPokeballContent();
+
+    Pokemon::displayNumberOfPokemons();
     return 0;
 }

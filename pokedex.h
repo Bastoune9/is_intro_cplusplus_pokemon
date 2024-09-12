@@ -18,14 +18,16 @@ public:
     static Pokedex* getInstance(const std::string& filename);
 
     // Fonctions de récupération
-    [[nodiscard]] Pokemon* getPokemonByIndex(int index) const override;
-    [[nodiscard]] Pokemon* getPokemonByName(const std::string& name) const override;
-
+    Pokemon* getPokemonByIndex(int index) override;
+    Pokemon* getPokemonByName(const std::string& name) override;
+    Pokemon *getRandomPokemon();
     // Fonction d'ouverture du fichier CSV
-    static void lireCSV (const std::string& nomFichier);
+    void lireCSV (const std::string& nomFichier);
 
     // Destructeur
     ~Pokedex() override;
+
+
 };
 
 #endif //INTROCPPPOKE_POKEDEX_H
