@@ -9,7 +9,7 @@ void StateExplorationSansDanger::enter() {
 }
 
 void StateExplorationSansDanger::exit() {
-    std::cout << "Vous avez capturé votre premier Pokemon, vous pouvez désormais rencontrer des dresseurs. \nCombien de dresseurs arriverez-vous à vaincre ?\n" << std::endl;
+    std::cout << "Vous possédez un Pokemon, vous pouvez désormais rencontrer des dresseurs. \n" << std::endl;
 }
 
 void StateExplorationSansDanger::handleEvent() {

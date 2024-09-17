@@ -28,6 +28,7 @@ void StateCombatDresseur::enter() {
         if (!game->getJoueur().getPokeball().isEmpty()) {
             game->changeState(std::make_shared<StateExploration>(game));
         } else {
+            std::cout << "Vous n'avez plus de Pokemon ! Les rencontres de dresseurs sont temporairement désactivées." << std::endl;
             game->changeState(std::make_shared<StateExplorationSansDanger>(game));
         }
     } else {
