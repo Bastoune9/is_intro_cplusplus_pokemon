@@ -1,40 +1,31 @@
 #include <iostream>
-#include "pokedex.h"
-#include "pokeball.h"
-#include "pokemonParty.h"
-#include <vector>
+#include "Game.h"
 
 int main() {
-    std::srand(static_cast<unsigned>(time(nullptr))); // NOLINT(*-msc51-cpp)
-    Pokedex* pokedex = Pokedex::getInstance("../Ressources/pokedex.csv");
-    Pokemon::displayNumberOfPokemons();
-    // Créer une pokeball
-    Pokeball pokeball;
-    try {
-        pokeball.addPokemon(pokedex->getPokemonByName("Azumarill"));
-        pokeball.addPokemon(pokedex->getPokemonByName("Heliolisk"));
-        pokeball.addPokemon(pokedex->getPokemonByIndex(333));
-        pokeball.addPokemon(pokedex->getPokemonByIndex(150));
-        pokeball.addRandomPokemon();
-        pokeball.addRandomPokemon();
-        pokeball.addRandomPokemon();
-        pokeball.addRandomPokemon();
-        pokeball.addRandomPokemon();
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
-    // Créer une PokemonParty en utilisant une Pokeball
-    try {
-        PokemonParty party(pokeball);  // Demande de choisir les Pokémon
-    } catch (const std::exception& e) {
-        std::cerr << "Erreur : " << e.what() << std::endl;
-    }
+    std::srand(static_cast<unsigned>(time(nullptr)));  // Initialiser le générateur aléatoire
+    std::cout << "Bienvenue dans le Jeu de Pokémon !\n";
 
-    // Afficher le contenu restant de la Pokeball
-    std::cout << "Contenu restant de la Pokeball :" << std::endl;
-    pokeball.displayPokeballContent();
+    // Demander le nom du joueur
+    std::string playerName;
+    std::cout << "Entrez votre nom de joueur : ";
+    std::getline(std::cin, playerName);
 
-    Pokemon::displayNumberOfPokemons();
+    // Créer une instance du jeu
+    Game game(playerName);
+
+    // Démarrer le jeu
+    game.start();
+
+    // Boucle principale du jeu
+    while (true) {
+        game.getCurrentState()->handleEvent();  // Gérer les événements de l'état actuel du jeu
+
+        // Vérifier si le joueur a perdu
+        if (game.getCurrentState()->checkEndCondition()) {
+            break;
+        }
+    }
+    std::cout << "Merci d'avoir joué !\n";
     return 0;
 }
 

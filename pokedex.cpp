@@ -72,9 +72,9 @@ void Pokedex::lireCSV (const std::string& nomFichier) {
         }
         int id = std::stoi(donneesLigne.at(0));
         std::string name = donneesLigne.at(1);
-        int hitPoints = std::stoi(donneesLigne.at(4));
-        int attackValue = std::stoi(donneesLigne.at(5));
-        int defenseValue = std::stoi(donneesLigne.at(6));
+        int hitPoints = std::stoi(donneesLigne.at(5));
+        int attackValue = std::stoi(donneesLigne.at(6));
+        int defenseValue = std::stoi(donneesLigne.at(7));
         int generation = std::stoi(donneesLigne.at(11));
         arrayOfPokemon.push_back(new Pokemon(id, name, hitPoints, attackValue, defenseValue, generation));
         // On définit autant de données qu'on veut

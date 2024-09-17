@@ -1,25 +1,23 @@
 #include "pokeball.h"
-#include "pokedex.h"
-#include <vector>
+//#include "pokedex.h"
+//#include <vector>
 
 // Constructeur de pokeball, initialement vide
-Pokeball::Pokeball() {
-    std::cout << "Création de la Pokeball !" << std::endl;
-}
+Pokeball::Pokeball() {}
 
 // Ajoute un pokemon spécifique à la pokeball
 void Pokeball::addPokemon(Pokemon *pokemon) {
     arrayOfPokemon.push_back(pokemon);
-    std::cout << pokemon->getName() << " a été ajouté à la Pokeball !" << std::endl;
+    // std::cout << pokemon->getName() << " a été ajouté à la Pokeball !" << std::endl;
 }
 
 // Ajoute un pokemon aléatoire à la pokeball
-void Pokeball::addRandomPokemon() {
-    Pokedex* pokedex = Pokedex::getInstance("");
-    Pokemon *pokemon = pokedex->getRandomPokemon();
-    arrayOfPokemon.push_back(pokemon);
-    std::cout << pokemon->getName() << " a été ajouté à la Pokeball !" << std::endl;
-}
+//void Pokeball::addRandomPokemon() {
+//    Pokedex* pokedex = Pokedex::getInstance("");
+//    Pokemon *pokemon = pokedex->getRandomPokemon();
+//    arrayOfPokemon.push_back(pokemon);
+//    std::cout << pokemon->getName() << " a été ajouté à la Pokeball !" << std::endl;
+//}
 
 // Récupération des pokemons de la pokeball
 Pokemon* Pokeball::getPokemonByIndex(int index) {
@@ -47,7 +45,11 @@ Pokemon* Pokeball::getPokemonByName(const std::string &name) {
 // Affichage du contenu de la Pokeball
 void Pokeball::displayPokeballContent() {
     for (const auto& pokemon : arrayOfPokemon) {
-        pokemon->displayInfo();
+        pokemon->displayAllInfo();
     }
+}
+
+bool Pokeball::isEmpty() const {
+    return arrayOfPokemon.empty();
 }
 

@@ -20,28 +20,26 @@ Pokemon::~Pokemon() {
     numberOfPokemons--;
 }
 
-// Affichage
+// Affiche toutes les infos du Pokemon
 void Pokemon::displayInfo() const {
     std::cout << "ID : " << id << " / " << name << std::endl;
 }
 
-// Variante qui affiche plus de stats du Pokemon
+// Affiche les stats du Pokemon
+void Pokemon::displayStats() const {
+    std::cout << "HP : " << hitPoint << " / ATK : " << attackValue << " / DEF : " << defenseValue << std::endl;
+}
+
+// Affiche toutes les infos du Pokemon
 void Pokemon::displayAllInfo() const {
-    std::cout << "ID : " << id << std::endl;
-    std::cout << "Nom : " << name << std::endl;
-    std::cout << "Points de vie : " << hitPoint << std::endl;
-    std::cout << "Attaque : " << attackValue << std::endl;
-    std::cout << "Defense : " << defenseValue << std::endl;
-    std::cout << "Génération : " << generation << std::endl;
+    displayInfo();
+    displayStats();
+    std::cout << std::endl;  // Saut de ligne
 }
 
 // Getters
-double Pokemon::getAttackValue() const {
-    return attackValue;
-}
-
-double Pokemon::getDefenseValue() const {
-    return defenseValue;
+double Pokemon::getHitPoint() const {
+    return hitPoint;
 }
 
 string Pokemon::getName() const {
@@ -52,20 +50,16 @@ int Pokemon::getId() const {
     return id;
 }
 
-int Pokemon::getNumberOfPokemon() {
-    return numberOfPokemons;
-}
-
-void Pokemon::displayNumberOfPokemons() {
-    std::cout << "Nombre de Pokemons en mémoire : " << numberOfPokemons << std::endl;
-}
+//void Pokemon::displayNumberOfPokemons() {
+//    std::cout << "Nombre de Pokemons en mémoire : " << numberOfPokemons << std::endl;
+//}
 
 // Fonction d'attaque d'un autre pokemonProgram
-void Pokemon::attack(Pokemon &anotherPokemon) const {
+void Pokemon::attack(Pokemon &anotherPokemon) {
     std::cout << name << " attaque " << anotherPokemon.name << " !" << std::endl;
     if (attackValue > anotherPokemon.defenseValue) {
         // Calcul des dégâts
-        double damage = attackValue - anotherPokemon.defenseValue;
+        double damage = (attackValue - anotherPokemon.defenseValue);
         anotherPokemon.hitPoint -= damage;
         std::cout << anotherPokemon.name << " subit " << damage << " points de dégâts !" << std::endl;
         // Vérifier si le Pokemon est KO
@@ -77,5 +71,8 @@ void Pokemon::attack(Pokemon &anotherPokemon) const {
         }
     } else {
         std::cout << anotherPokemon.name << " a résisté à l'attaque !" << std::endl;
+        hitPoint -= 20;  // Dégâts de fatigue pour éviter un SoftLock si deux Pokemons défensifs s'affrontent
+        std::cout << name << " s'inflige 20 points de dégâts de fatigue ..." << std::endl;
+        std::cout << name << " a maintenant " << hitPoint << " points de vie !" << std::endl;
     }
 }

@@ -26,7 +26,7 @@ PokemonParty::PokemonParty(Pokeball& pokeball) {
     }
     // Choix des Pokemons à transférer (par leur nom ou par leur index de pokedex)
     for (int i = 0; i < numPokemon; i++) {
-        std::cout << "Veuillez entrer le nom ou l'index du Pokemon à transférer : ";
+        std::cout << "Veuillez entrer le nom ou l'ID de pokedex du Pokemon à transférer : ";
         std::cin >> input;
         try {
             Pokemon* chosenPokemon = nullptr;
@@ -46,8 +46,19 @@ PokemonParty::PokemonParty(Pokeball& pokeball) {
         }
     }
     // Affichage de la PokemonParty après sélection
-    std::cout << "Votre PokemonParty a été constituée avec succès !" << std::endl;
     displayParty();
+}
+
+// Constructeur avec nombre de Pokémon aléatoires (pour les équipes des dresseurs adverses)
+PokemonParty::PokemonParty(int numberOfPokemons, Pokedex& pokedex) {
+    if (numberOfPokemons < 1 || numberOfPokemons > 6) {
+        throw std::invalid_argument("Le nombre de Pokémon doit être entre 1 et 6.");
+    }
+    // Ajouter des Pokémon aléatoires à la PokemonParty
+    for (int i = 0; i < numberOfPokemons; ++i) {
+        Pokemon *randomPokemon = pokedex.getRandomPokemon();  // Obtenir un Pokémon aléatoire du Pokedex
+        arrayOfPokemon.push_back(randomPokemon);
+    }
 }
 
 // Affichage de la PokemonParty
@@ -78,3 +89,11 @@ Pokemon* PokemonParty::getPokemonByName(const std::string& name) {
     throw std::invalid_argument("Aucun Pokémon trouvé avec ce nom dans la PokemonParty.");
 }
 
+std::vector<Pokemon*>& PokemonParty::getArrayOfPokemon() {
+    return arrayOfPokemon;
+}
+
+// Méthode pour obtenir la taille de la PokemonParty
+int PokemonParty::getSize() const {
+    return static_cast<int>(arrayOfPokemon.size());
+}
