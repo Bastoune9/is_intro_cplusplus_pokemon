@@ -49,5 +49,6 @@ S'il s'agissait du dernier Pokemon, le joueur adverse **gagne le combat**.
 
 La partie prend fin lorsque le joueur **perd un combat** contre un dresseur.
 On affiche alors son score final sous la forme du **nombre de Pokemons adverses qu'il a mis K.O.**.
+Remporter un combat avec **plusieurs Pokemons dans son équipe** rapporte donc **davantage de points**.
 Il n'y a pas de condition de victoire puisque le jeu est **potentiellement infini**.
 
