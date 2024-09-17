@@ -23,8 +23,7 @@ void StateCombatDresseur::enter() {
     bool playerWins = simulateBattle(playerParty, opponentParty);
 
     if (playerWins) {
-        std::cout << "Vous avez gagné le combat !\n" << std::endl;
-        game->incrementTrainerBattlesWon();
+        game->incrementPokemonsBeaten();
         // On renvoie le joueur en exploration en fonction du nombre de pokemons qu'il lui reste
         if (!game->getJoueur().getPokeball().isEmpty()) {
             game->changeState(std::make_shared<StateExploration>(game));
@@ -52,10 +51,12 @@ bool StateCombatDresseur::simulateBattle(PokemonParty& playerParty, PokemonParty
         playerPokemon->displayStats();
         std::cout << "Le Pokémon de l'adversaire : " << opponentPokemon->getName() << std::endl;
         opponentPokemon->displayStats();
+
         // Joueur attaque ou remplace son Pokémon
         bool playerAction = false; // false = attaque, true = remplacer
         std::cout << "\nVoulez-vous attaquer (0) ou remplacer votre Pokémon (1) ? ";
         std::cin >> playerAction;
+
         if (playerAction) {
             // Remplacer le Pokémon
             if (playerIndex + 1 < playerPokemons.size()) {
@@ -65,11 +66,14 @@ bool StateCombatDresseur::simulateBattle(PokemonParty& playerParty, PokemonParty
             } else {
                 std::cout << "Le joueur n'a plus de Pokémon à remplacer." << std::endl;
             }
+
         } else {
             // Le joueur attaque
             playerPokemon->attack(*opponentPokemon);
             // Vérifier si le Pokémon adverse est KO
             if (opponentPokemon->getHitPoint() <= 0) {
+                game->incrementPokemonsBeaten();
+                std::cout << "Vous gagnez un point de combat !" << std::endl;
                 ++opponentIndex;
                 if (opponentIndex < opponentPokemons.size()) {
                     opponentPokemon = opponentPokemons[opponentIndex];
@@ -102,6 +106,8 @@ bool StateCombatDresseur::simulateBattle(PokemonParty& playerParty, PokemonParty
             } else {
                 // Vérifier si le Pokémon adverse attaquant est KO de fatigue
                 if (opponentPokemon->getHitPoint() <= 0) {
+                    game->incrementPokemonsBeaten();
+                    std::cout << "Vous gagnez un point de combat !" << std::endl;
                     ++opponentIndex;
                     if (opponentIndex < opponentPokemons.size()) {
                         opponentPokemon = opponentPokemons[opponentIndex];
@@ -115,11 +121,11 @@ bool StateCombatDresseur::simulateBattle(PokemonParty& playerParty, PokemonParty
         }
         // Vérifier si un joueur a perdu tous ses Pokémon
         if (playerIndex >= playerPokemons.size()) {
-            std::cout << "Le joueur a perdu tous ses Pokémon. L'adversaire gagne." << std::endl;
+            std::cout << "Le joueur a perdu tous ses Pokémon. L'adversaire gagne le combat ...\n" << std::endl;
             return false;
         }
         if (opponentIndex >= opponentPokemons.size()) {
-            std::cout << "L'adversaire a perdu tous ses Pokémon. Le joueur gagne." << std::endl;
+            std::cout << "L'adversaire a perdu tous ses Pokémon. Le joueur gagne le combat !\n" << std::endl;
             return true;
         }
     }
@@ -127,15 +133,13 @@ bool StateCombatDresseur::simulateBattle(PokemonParty& playerParty, PokemonParty
 }
 
 
-void StateCombatDresseur::exit() {
-    std::cout << "Fin du combat." << std::endl;
-}
+void StateCombatDresseur::exit() {}
 
 void StateCombatDresseur::handleEvent() {
     // Aucun événement spécifique
 }
 
 bool StateCombatDresseur::checkEndCondition() {
-        std::cout << "Vous avez remporté " << game->getTrainerBattlesWon() << " combat(s) de dresseurs !" << std::endl;
+        std::cout << "Score final :  " << game->getPokemonsBeaten() << " points de combat !" << std::endl;
         return true;
 }

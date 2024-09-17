@@ -3,7 +3,7 @@
 
 // Gère la transition entre les états et les interactions avec le joueur
 
-Game::Game(const std::string& playerName) : joueur(playerName), trainerBattlesWon(0) {
+Game::Game(const std::string& playerName) : joueur(playerName), pokemonsBeaten(0) {
     currentState = std::make_shared<StateAttente>(this);
 }
 
@@ -28,11 +28,11 @@ const std::shared_ptr<GameState> &Game::getCurrentState() const {
 }
 
 // Retourne le nombre de combats de dresseurs gagnés
-int Game::getTrainerBattlesWon() const {
-    return trainerBattlesWon;
+int Game::getPokemonsBeaten() const {
+    return pokemonsBeaten;
 }
 
 // Incrémente le nombre de combats de dresseurs gagnés
-void Game::incrementTrainerBattlesWon() {
-    trainerBattlesWon++;
+void Game::incrementPokemonsBeaten() {
+    pokemonsBeaten++;
 }

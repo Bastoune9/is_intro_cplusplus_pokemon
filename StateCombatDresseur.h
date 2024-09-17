@@ -9,7 +9,7 @@ class StateCombatDresseur : public GameState {
 private:
     Game* game;
     // Méthode de simulation de combat
-    static bool simulateBattle(PokemonParty& playerParty, PokemonParty& opponentParty);
+    bool simulateBattle(PokemonParty& playerParty, PokemonParty& opponentParty);
 
 public:
     explicit StateCombatDresseur(Game* game);

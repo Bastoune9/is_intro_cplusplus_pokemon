@@ -9,7 +9,7 @@ class Game {  // Gère la transition entre les états et les interactions avec l
 private:
     std::shared_ptr<GameState> currentState;
     Player joueur;
-    int trainerBattlesWon;
+    int pokemonsBeaten;
 
 public:
     explicit Game(const std::string& playerName);
@@ -24,10 +24,10 @@ public:
     Player& getJoueur();
 
     // Retourne le nombre de combats de dresseurs gagnés
-    [[nodiscard]] int getTrainerBattlesWon() const;
+    [[nodiscard]] int getPokemonsBeaten() const;
 
     // Incrémente le nombre de combats de dresseurs gagnés
-    void incrementTrainerBattlesWon();
+    void incrementPokemonsBeaten();
 
     [[nodiscard]] const std::shared_ptr<GameState> &getCurrentState() const;
 };

@@ -48,6 +48,6 @@ S'il s'agissait du dernier Pokemon, le joueur adverse **gagne le combat**.
 ### *Conditions de victoire / défaite*
 
 La partie prend fin lorsque le joueur **perd un combat** contre un dresseur.
-On affiche alors son score final sous la forme du **nombre de combats qu'il a gagné**.
+On affiche alors son score final sous la forme du **nombre de Pokemons adverses qu'il a mis K.O.**.
 Il n'y a pas de condition de victoire puisque le jeu est **potentiellement infini**.
 
