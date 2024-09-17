@@ -87,7 +87,7 @@ bool StateCombatDresseur::simulateBattle(PokemonParty& playerParty, PokemonParty
                         playerPokemon = playerPokemons[playerIndex];
                         std::cout << "Le joueur envoie un nouveau Pokémon : " << playerPokemon->getName() << std::endl;
                     } else {  // Plus de Pokemon
-                        std::cout << "Le joueur a perdu tous ses Pokémon. L'adversaire gagne." << std::endl;
+                        std::cout << "Le joueur a perdu tous ses Pokémon. L'adversaire gagne ...\n" << std::endl;
                         return false;
                     }
                 }
@@ -106,6 +106,7 @@ bool StateCombatDresseur::simulateBattle(PokemonParty& playerParty, PokemonParty
             } else {
                 // Vérifier si le Pokémon adverse attaquant est KO de fatigue
                 if (opponentPokemon->getHitPoint() <= 0) {
+                    std::cout << opponentPokemon->getName() << " tombe KO de fatigue ..." << std::endl;
                     game->incrementPokemonsBeaten();
                     std::cout << "Vous gagnez un point de combat !" << std::endl;
                     ++opponentIndex;
@@ -113,7 +114,7 @@ bool StateCombatDresseur::simulateBattle(PokemonParty& playerParty, PokemonParty
                         opponentPokemon = opponentPokemons[opponentIndex];
                         std::cout << "L'adversaire envoie un nouveau Pokémon : " << opponentPokemon->getName()<< std::endl;
                     } else {  // Plus de Pokemon
-                        std::cout << "L'adversaire a perdu tous ses Pokémon. Le joueur gagne." << std::endl;
+                        std::cout << "L'adversaire a perdu tous ses Pokémon. Le joueur gagne !\n" << std::endl;
                         return true;
                     }
                 }
@@ -140,6 +141,6 @@ void StateCombatDresseur::handleEvent() {
 }
 
 bool StateCombatDresseur::checkEndCondition() {
-        std::cout << "Score final :  " << game->getPokemonsBeaten() << " points de combat !" << std::endl;
+        std::cout << "Score final :  " << game->getPokemonsBeaten() << " point(s) de combat !" << std::endl;
         return true;
 }
